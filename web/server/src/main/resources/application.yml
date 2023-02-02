@@ -1,0 +1,45 @@
+##端口配置信息
+server:
+  port: 8087
+  max-http-header-size: 8129MB
+#  ssl:
+#    key-store: keystore.p12
+#    key-store-password: 123456
+#    key-store-type: PKCS12
+
+##使用双数据库
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        medical_system:
+          url: jdbc:mysql://localhost:3306/medical_system?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+          username: root
+          password: 101810
+          driver-class-name: com.mysql.jdbc.Driver
+        yujv:
+          url: jdbc:mysql://localhost:3306/yujv?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+          username: root
+          password: 101810
+          driver-class-name: com.mysql.jdbc.Driver
+      primary: medical_system
+      druid:
+        initial-size: 1
+        max-active: 20
+        min-idle: 1
+        max-wait: 60000
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+##人脸识别配置信息
+config:
+  arcface-sdk:
+    sdk-lib-path:D:\medical_system\server\arcsoft_lib
+    app-id:7wtLdNbFwEuPD5LSxNefhMjKsqASthxpS83UcHDbpTvM
+    sdk-key:2hyqSAh7MaHqbjtnyZ6rMyMDPAXbqR2zz4QwxJ7GYivf
+  agora-sdk:
+    app-id:e0d0425ba7684ea0b42f49a94ae08e88
